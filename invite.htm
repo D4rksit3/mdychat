@@ -1,166 +1,199 @@
-
 <!-- saved from url=(0086)https://go.rocket.chat/invite?host=10.200.52.227%3A3000&path=invite%2Fn9ZHfC&secure=no -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./invite_files/analytics.js.descarga"></script><script async="" src="./invite_files/js"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-63218225-6")</script><meta name="viewport" content="width=device-width,initial-scale=1"><script>function getMobileOperatingSystem() {
-				var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script
+      type="text/javascript"
+      async=""
+      src="./invite_files/analytics.js"
+    ></script>
+    <script async="" src="./invite_files/js"></script>
+    <script>
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (window.dataLayer = window.dataLayer || []),
+        gtag("js", new Date()),
+        gtag("config", "UA-63218225-6");
+    </script>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script>
+      function getMobileOperatingSystem() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-				// Windows Phone must come first because its UA also contains "Android"
-				if (/windows phone/i.test(userAgent)) {
-					return "Windows Phone";
-				}
+        // Windows Phone must come first because its UA also contains "Android"
+        if (/windows phone/i.test(userAgent)) {
+          return "Windows Phone";
+        }
 
-				if (/android/i.test(userAgent)) {
-					return "Android";
-				}
+        if (/android/i.test(userAgent)) {
+          return "Android";
+        }
 
-				// iOS detection from: http://stackoverflow.com/a/9039885/177710
-				if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-					return "iOS";
-				}
+        // iOS detection from: http://stackoverflow.com/a/9039885/177710
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          return "iOS";
+        }
 
-				return "unknown";
-			}
+        return "unknown";
+      }
 
-			function getParams (search) {
-				var result = null,
-					result = {};
+      function getParams(search) {
+        var result = null,
+          result = {};
 
-				search = search || window.location.search.substr(1);
-				search
-					.split("&")
-					.forEach(function (item) {
-						var tmp = item.split("=");
-						result[tmp[0]] = decodeURIComponent(tmp[1]);
-					});
-				return result;
-			}
+        search = search || window.location.search.substr(1);
+        search.split("&").forEach(function (item) {
+          var tmp = item.split("=");
+          result[tmp[0]] = decodeURIComponent(tmp[1]);
+        });
+        return result;
+      }
 
-			function getAppPath (path, params) {
-				var action = path !== '/index.html' ? (path.replace(/^[/]/, '') || 'room') : 'room';
-				var url = 'rocketchat://' + action + '?';
-				var qs = [];
+      function getAppPath(path, params) {
+        var action =
+          path !== "/index.html" ? path.replace(/^[/]/, "") || "room" : "room";
+        var url = "rocketchat://" + action + "?";
+        var qs = [];
 
-				if (params['host']) {
-					var action = params['host'].split('/');
+        if (params["host"]) {
+          var action = params["host"].split("/");
 
-					qs.push('host=' + params['host']);
-				}
+          qs.push("host=" + params["host"]);
+        }
 
-				if (params['rid']) {
-					qs.push('rid=' + params['rid']);
-				}
+        if (params["rid"]) {
+          qs.push("rid=" + params["rid"]);
+        }
 
-				if (params['path']) {
-					qs.push('path=' + params['path']);
-				}
+        if (params["path"]) {
+          qs.push("path=" + params["path"]);
+        }
 
-				if (params['token']) {
-					qs.push('token=' + params['token']);
-				}
+        if (params["token"]) {
+          qs.push("token=" + params["token"]);
+        }
 
-				if (params['userId']) {
-					qs.push('userId=' + params['userId']);
-				}
+        if (params["userId"]) {
+          qs.push("userId=" + params["userId"]);
+        }
 
-				if (params['insecure']) {
-					qs.push('insecure=' + params['insecure']);
-				}
+        if (params["insecure"]) {
+          qs.push("insecure=" + params["insecure"]);
+        }
 
-				return url + qs.join('&');
-			}
+        return url + qs.join("&");
+      }
 
-			function getServerPath (params) {
-				var append = ['userId'];
-				var url = (params['secure'] === 'no' ? 'http' : 'https') + '://' + params['host'];
-				var qs = [];
+      function getServerPath(params) {
+        var append = ["userId"];
+        var url =
+          (params["secure"] === "no" ? "http" : "https") +
+          "://" +
+          params["host"];
+        var qs = [];
 
-				if (params['token']) {
-					qs.push('resumeToken=' + encodeURIComponent(params['token']));
-				}
+        if (params["token"]) {
+          qs.push("resumeToken=" + encodeURIComponent(params["token"]));
+        }
 
-				append.forEach(function (a) {
-					if (params[a]) qs.push(a + '=' + encodeURIComponent(params[a]));
-				});
+        append.forEach(function (a) {
+          if (params[a]) qs.push(a + "=" + encodeURIComponent(params[a]));
+        });
 
-				return {
-					baseAddress: url,
-					redirectUrl: url + '/' + (params['path'] ? params['path'] : 'home') + (qs.length > 0 ? '?' + qs.join('&') : '')
-				};
-			}
+        return {
+          baseAddress: url,
+          redirectUrl:
+            url +
+            "/" +
+            (params["path"] ? params["path"] : "home") +
+            (qs.length > 0 ? "?" + qs.join("&") : ""),
+        };
+      }
 
-			async function goToWeb(verify = false) {
-				var save = document.getElementById('save').checked;
-				if (save) {
-					localStorage.setItem('goLocation', 'Web');
-				} else {
-					localStorage.removeItem('goLocation');
-				}
+      async function goToWeb(verify = false) {
+        var save = document.getElementById("save").checked;
+        if (save) {
+          localStorage.setItem("goLocation", "Web");
+        } else {
+          localStorage.removeItem("goLocation");
+        }
 
-				var url = 'https://rocket.chat';
+        var url = "https://rocket.chat";
 
-				var result = getServerPath(getParams());
-				if (result.redirectUrl.indexOf('undefined/home') !== -1) {
-					window.location = url;
-					return;
-				} else {
-					url = result.redirectUrl;
-				}
+        var result = getServerPath(getParams());
+        if (result.redirectUrl.indexOf("undefined/home") !== -1) {
+          window.location = url;
+          return;
+        } else {
+          url = result.redirectUrl;
+        }
 
-				if (verify && !await verifyIsWorkspace(result.baseAddress)) {
-					window.location = window.location.href.replace(/&?forceLocation=Web/g, '');
-					return;
-				}
+        if (verify && !(await verifyIsWorkspace(result.baseAddress))) {
+          window.location = window.location.href.replace(
+            /&?forceLocation=Web/g,
+            ""
+          );
+          return;
+        }
 
-				window.location = url;
-			}
+        window.location = url;
+      }
 
-			async function verifyIsWorkspace(baseAddress) {
-				const response = await fetch(`/isWorkspace?address=${baseAddress}`);
-				if (response.status == 200) {
-					return true;
-				} else {
-					return false;
-				}
-			}
+      async function verifyIsWorkspace(baseAddress) {
+        const response = await fetch(`/isWorkspace?address=${baseAddress}`);
+        if (response.status == 200) {
+          return true;
+        } else {
+          return false;
+        }
+      }
 
-			function goToApp(fallback) {
-				var isActive = true;
-				window.onfocus = function () { isActive = true; };
-				window.onblur = function () { isActive = false; };
-				var now = new Date();
-				var goToFallback = function(time) {
-					setTimeout(function () {
-						if (Date.now() - now > 5000) return;
-						var mobile = getMobileOperatingSystem();
-						var fallback = '';
-						if (mobile === 'Android') {
-							fallback = 'https://play.google.com/store/apps/details?id=chat.rocket.android';
-						} else if (mobile === 'iOS') {
-							fallback = 'https://itunes.apple.com/app/rocket-chat/id1148741252';
-						} else {
-							fallback = 'https://rocket.chat/install';
-						}
+      function goToApp(fallback) {
+        var isActive = true;
+        window.onfocus = function () {
+          isActive = true;
+        };
+        window.onblur = function () {
+          isActive = false;
+        };
+        var now = new Date();
+        var goToFallback = function (time) {
+          setTimeout(function () {
+            if (Date.now() - now > 5000) return;
+            var mobile = getMobileOperatingSystem();
+            var fallback = "";
+            if (mobile === "Android") {
+              fallback =
+                "https://play.google.com/store/apps/details?id=chat.rocket.android";
+            } else if (mobile === "iOS") {
+              fallback =
+                "https://itunes.apple.com/app/rocket-chat/id1148741252";
+            } else {
+              fallback = "https://rocket.chat/install";
+            }
 
-						// console.log('redirect ->', fallback);
-						if (isActive && typeof tests === 'undefined') window.location = fallback;
-						goToFallback(3000);
+            // console.log('redirect ->', fallback);
+            if (isActive && typeof tests === "undefined")
+              window.location = fallback;
+            goToFallback(3000);
+          }, time);
+        };
+        if (fallback === true) {
+          goToFallback(1000);
+        }
+        var save = document.getElementById("save").checked;
+        if (save) {
+          localStorage.setItem("goLocation", "App");
+        } else {
+          localStorage.removeItem("goLocation");
+        }
 
-					}, time);
-				}
-				if (fallback === true) {
-					goToFallback(1000);
-				}
-				var save = document.getElementById('save').checked;
-				if (save) {
-					localStorage.setItem('goLocation', 'App');
-				} else {
-					localStorage.removeItem('goLocation');
-				}
+        var url = getAppPath(window.location.pathname, getParams());
+        if (typeof tests === "undefined") window.location = url;
+      }
 
-				var url = getAppPath(window.location.pathname, getParams());
-				if (typeof tests === 'undefined') window.location = url;
-			}
-
-			/*
+      /*
 			//https://go.rocket.chat/room?host=open.rocket.chat
 			var tests = [
 				{
@@ -204,4 +237,133 @@
 				//delete cfg.fallback;
 				//cfg.appOk = getAppPath(url[0], getParams(url[1]));
 				return cfg;
-			}));//*/</script><style>body{font-size:1em;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";color:#6b7d99}#container{text-align:center;background:#fff;height:100%;margin:0 auto;margin-top:20px}#container .logo{width:360px;margin:20px auto}#container .row.first{margin-bottom:50px}#container div.save{margin:30px auto}#container div.save input{-webkit-appearance:checkbox;-moz-appearance:checkbox;appearance:checkbox}#container div.save span{margin-left:6px;font-size:14px;color:#aebecd}#container a.button{-webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer;outline:0;border:0;background:0 0;text-decoration:none;color:#1d74f5;font-weight:500;font-size:.8em;line-height:1.5;text-align:center;display:-webkit-inline-box;display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-justify-content:space-around;-moz-justify-content:space-around;-ms-justify-content:space-around;justify-content:space-around;-ms-flex-pack:center;vertical-align:top;padding:.9em 1.14em;border-radius:2px;transition:all .3s ease;color:#fff;background-color:#1d74f5}#container a.button:first-child{margin-right:10px}#container div.hidden{display:none}</style></head><body><div id="container" ng-switch="mode" ng-class="mode" ng-cloak=""><img src="./invite_files/logo-horizontal-red.svg" class="logo"><div class="row first"><p class="head">Bienvenido, para ingresar al equipo clickea al boton!</p></div><div class="row buttons"><!-- <a data-target="app" target="_blank" class="button" id="download-button" onclick="goToApp(!0)">Desktop application</a> --> <a data-target="web" target="_blank" class="button" onclick="goToWeb()">Unirse al equipo</a></div><div class="row save-checkbox"><div class="save"><input type="checkbox" name="save" id="save"> <span onclick="document.getElementById(&quot;save&quot;).click()">Haz lo mismo la próxima vez</span></div></div></div><script>var params=getParams();if(params&&params.forceLocation)fn="goTo"+params.forceLocation,window[fn](!0);else{var goLocation=localStorage.getItem("goLocation");if(goLocation){document.getElementById("save").checked=!0,fn="goTo"+goLocation;var timeout=setTimeout(window[fn],1e3);document.getElementById("save").onchange=function(){clearTimeout(timeout)}}var mobile=getMobileOperatingSystem();"Android"===mobile||"iOS"===mobile?(goToApp(),document.getElementById("download-button").innerHTML="Mobile application"):document.getElementById("download-button").innerHTML="Desktop application";var buttons=document.getElementsByClassName("buttons");buttons&&0<buttons.length&&buttons[0].classList.remove("hidden");var checkboxRow=document.getElementsByClassName("save-checkbox");checkboxRow&&0<checkboxRow.length&&checkboxRow[0].classList.remove("hidden")}</script></body></html>
+			}));//*/
+    </script>
+    <style>
+      body {
+        font-size: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol";
+        color: #6b7d99;
+      }
+      #container {
+        text-align: center;
+        background: #fff;
+        height: 100%;
+        margin: 0 auto;
+        margin-top: 20px;
+      }
+      #container .logo {
+        width: 360px;
+        margin: 20px auto;
+      }
+      #container .row.first {
+        margin-bottom: 50px;
+      }
+      #container div.save {
+        margin: 30px auto;
+      }
+      #container div.save input {
+        -webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        appearance: checkbox;
+      }
+      #container div.save span {
+        margin-left: 6px;
+        font-size: 14px;
+        color: #aebecd;
+      }
+      #container a.button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        outline: 0;
+        border: 0;
+        background: 0 0;
+        text-decoration: none;
+        color: #1d74f5;
+        font-weight: 500;
+        font-size: 0.8em;
+        line-height: 1.5;
+        text-align: center;
+        display: -webkit-inline-box;
+        display: -webkit-inline-flex;
+        display: -moz-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-justify-content: space-around;
+        -moz-justify-content: space-around;
+        -ms-justify-content: space-around;
+        justify-content: space-around;
+        -ms-flex-pack: center;
+        vertical-align: top;
+        padding: 0.9em 1.14em;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        color: #fff;
+        background-color: #1d74f5;
+      }
+      #container a.button:first-child {
+        margin-right: 10px;
+      }
+      #container div.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container" ng-switch="mode" ng-class="mode" ng-cloak="">
+      <img src="./invite_files/logo-horizontal-red.svg" class="logo" />
+      <div class="row first">
+        <p class="head">
+          Bienvenido, para ingresar al equipo clickea al boton!
+        </p>
+      </div>
+      <div class="row buttons">
+        <!-- <a data-target="app" target="_blank" class="button" id="download-button" onclick="goToApp(!0)">Desktop application</a> -->
+        <a data-target="web" target="_blank" class="button" onclick="goToWeb()"
+          >Unirse al equipo</a
+        >
+      </div>
+      <div class="row save-checkbox">
+        <div class="save">
+          <input type="checkbox" name="save" id="save" />
+          <span onclick='document.getElementById("save").click()'
+            >Haz lo mismo la próxima vez</span
+          >
+        </div>
+      </div>
+    </div>
+    <script>
+      var params = getParams();
+      if (params && params.forceLocation)
+        (fn = "goTo" + params.forceLocation), window[fn](!0);
+      else {
+        var goLocation = localStorage.getItem("goLocation");
+        if (goLocation) {
+          (document.getElementById("save").checked = !0),
+            (fn = "goTo" + goLocation);
+          var timeout = setTimeout(window[fn], 1e3);
+          document.getElementById("save").onchange = function () {
+            clearTimeout(timeout);
+          };
+        }
+        var mobile = getMobileOperatingSystem();
+        "Android" === mobile || "iOS" === mobile
+          ? (goToApp(),
+            (document.getElementById("download-button").innerHTML =
+              "Mobile application"))
+          : (document.getElementById("download-button").innerHTML =
+              "Desktop application");
+        var buttons = document.getElementsByClassName("buttons");
+        buttons && 0 < buttons.length && buttons[0].classList.remove("hidden");
+        var checkboxRow = document.getElementsByClassName("save-checkbox");
+        checkboxRow &&
+          0 < checkboxRow.length &&
+          checkboxRow[0].classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
