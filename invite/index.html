@@ -119,7 +119,7 @@
           localStorage.removeItem("goLocation");
         }
 
-        var url = "http://168.121.51.42:3000";
+        var url = "https://chat.ich.pe";
 
         var result = getServerPath(getParams());
         if (result.redirectUrl.indexOf("undefined/home") !== -1) {
@@ -165,7 +165,7 @@
             var fallback = "";
             if (mobile === "Android") {
               fallback =
-                "https://play.google.com/store/apps/details?id=chat.rocket.android";
+                "https://play.google.com/store/apps/details?id=chatich";
             } else if (mobile === "iOS") {
               fallback =
                 "https://itunes.apple.com/app/rocket-chat/id1148741252";
@@ -316,7 +316,7 @@
   <body>
     <div id="container" ng-switch="mode" ng-class="mode" ng-cloak="">
       <img
-        src="https://mdybpo.com/wp-content/uploads/2021/06/mdy_logo.svg"
+        src="https://chat.ich.pe/assets/logo.png"
         class="logo"
       />
       <div class="row first">
